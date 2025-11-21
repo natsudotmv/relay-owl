@@ -20,40 +20,35 @@ namespace Relayowl.Api.Controllers
         }
 
         // GET: api/department/{id}
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<Department>> GetDepartment(int id)
         {
             var department = await service.GetDepartmentByIdAsync(id);
-            if (department == null)
-                return NotFound();
-            return Ok(department.ToReadDepartmentDto());
+            return Ok(department?.ToReadDepartmentDto());
         }
 
         // POST: api/department
         [HttpPost]
         public async Task<ActionResult<ReadDepartmentDto>> CreateDepartment([FromBody] CreateDepartmentDto dto)
         {
-            var entity = dto.ToCreateDepartmentEntity();
-            var created = await service.CreateDepartmentAsync(entity);
-            return CreatedAtAction(nameof(GetDepartment), new { id = created.Id }, entity.ToReadDepartmentDto());
+            var department = dto.ToCreateDepartmentEntity();
+            await service.CreateDepartmentAsync(department);
+            var readDto = department.ToReadDepartmentDto();
+            return CreatedAtAction(nameof(GetDepartment), new { id = readDto.Id }, department.ToReadDepartmentDto());
         }
 
         // PUT: api/department/{id}
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDepartment(int id, [FromBody] Department department)
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<ReadDepartmentDto>> UpdateDepartment(int id, [FromBody] UpdateDepartmentDto updateDepartmentDto)
         {
-            if(id != department.Id)
-                return BadRequest("ID mismatch");
+            var departmentToUpdate = updateDepartmentDto.ToUpdateDepartmentEntity();
+            var updatedLocation = await service.UpdateDepartmentAsync(id, departmentToUpdate);
             
-            var updated = await service.UpdateDepartmentAsync(department);
-            if (!updated)
-                return NotFound();
-
-            return NoContent();
+            return Ok(updatedLocation);
         }
 
         // DELETE: api/department/{id}
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteDepartment(int id)
         {
             var deleted = await service.DeleteDepartmentAsync(id);

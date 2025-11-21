@@ -22,21 +22,19 @@ public class DepartmentService(IDepartmentRepository repository) : IDepartmentSe
     // Create a new department
     public async Task<Department> CreateDepartmentAsync(Department department)
     {
-        if (department == null)
-            throw new ArgumentNullException(nameof(department));
+        ArgumentNullException.ThrowIfNull(department);
 
         await repository.AddAsync(department);
         return department;
     }
 
     // Update an existing department
-    public async Task<bool> UpdateDepartmentAsync(Department department)
+    public async Task<bool> UpdateDepartmentAsync(int id, Department department)
     {
-        if (department == null)
-            throw new ArgumentNullException(nameof(department));
+        ArgumentNullException.ThrowIfNull(department);
 
-        var existing = await repository.GetByIdAsync(department.Id);
-        if (existing == null)
+        var existingDepartment = await repository.GetByIdAsync(department.Id);
+        if (existingDepartment == null)
             return false;
 
         await repository.UpdateAsync(department);
@@ -46,11 +44,11 @@ public class DepartmentService(IDepartmentRepository repository) : IDepartmentSe
     // Delete a department by ID
     public async Task<bool> DeleteDepartmentAsync(int id)
     {
-        var existing = await repository.GetByIdAsync(id);
-        if (existing == null)
+        var existingDepartment = await repository.GetByIdAsync(id);
+        if (existingDepartment == null)
             throw new KeyNotFoundException($"Department with Id {id} not found.");
 
-        await repository.DeleteAsync(existing);
+        await repository.DeleteAsync(existingDepartment);
         return true;
     }
 }
