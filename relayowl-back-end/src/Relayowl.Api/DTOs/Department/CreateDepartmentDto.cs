@@ -1,0 +1,6 @@
+namespace Relayowl.Api.DTOs.Department;
+
+public class CreateDepartmentDto
+{
+    public string Name { get; set; } = null!;
+}

@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Relayowl.Api.DTOs.Department;
+using Relayowl.Api.Mappers;
 using Relayowl.Core.Entities;
 using Relayowl.Core.Services;
 
@@ -10,10 +12,11 @@ namespace Relayowl.Api.Controllers
     {
         // GET: api/department
          [HttpGet]
-        public async Task<ActionResult<IEnumerable<Department>>> GetDepartments()
+        public async Task<ActionResult<List<Department>>> GetDepartments()
         {
             var departments = await service.GetAllDepartmentsAsync();
-            return Ok(departments);
+            var dtoList = departments.Select(d => d.ToReadDepartmentDto()).ToList();
+            return Ok(dtoList);
         }
 
         // GET: api/department/{id}
@@ -23,15 +26,16 @@ namespace Relayowl.Api.Controllers
             var department = await service.GetDepartmentByIdAsync(id);
             if (department == null)
                 return NotFound();
-            return Ok(department);
+            return Ok(department.ToReadDepartmentDto());
         }
 
         // POST: api/department
         [HttpPost]
-        public async Task<ActionResult<Department>> CreateDepartment([FromBody] Department department)
+        public async Task<ActionResult<ReadDepartmentDto>> CreateDepartment([FromBody] CreateDepartmentDto dto)
         {
-            var created = await service.CreateDepartmentAsync(department);
-            return CreatedAtAction(nameof(GetDepartment), new { id = created.Id }, created);
+            var entity = dto.ToCreateDepartmentEntity();
+            var created = await service.CreateDepartmentAsync(entity);
+            return CreatedAtAction(nameof(GetDepartment), new { id = created.Id }, entity.ToReadDepartmentDto());
         }
 
         // PUT: api/department/{id}
