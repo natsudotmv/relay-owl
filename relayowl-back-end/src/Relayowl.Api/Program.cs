@@ -3,6 +3,7 @@ using Relayowl.Core.Entities;
 using Relayowl.Core.Respositories;
 using Relayowl.Core.Services;
 using Relayowl.Infrastructure.Data;
+using Relayowl.Infrastructure.Data.Seed.Production;
 using Relayowl.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    
+    DataSeeder.Seed(context);
 }
 
 app.UseHttpsRedirection();
