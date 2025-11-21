@@ -3,6 +3,7 @@ using Relayowl.Core.Entities;
 using Relayowl.Core.Respositories;
 using Relayowl.Core.Services;
 using Relayowl.Infrastructure.Data;
+using Relayowl.Infrastructure.Data.Seed.Development;
 using Relayowl.Infrastructure.Data.Seed.Production;
 using Relayowl.Infrastructure.Repositories;
 
@@ -17,6 +18,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<ILocationService, LocationService>();
 
 var app = builder.Build();
 
@@ -31,6 +34,11 @@ using (var scope = app.Services.CreateScope())
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     
     DataSeeder.Seed(context);
+
+    if (app.Environment.IsDevelopment())
+    {
+        DevDataSeeder.Seed((context));
+    }
 }
 
 app.UseHttpsRedirection();
