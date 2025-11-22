@@ -39,12 +39,16 @@ namespace Relayowl.Api.Controllers
 
         // PUT: api/department/{id}
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<ReadDepartmentDto>> UpdateDepartment(int id, [FromBody] UpdateDepartmentDto updateDepartmentDto)
+        public async Task<IActionResult> UpdateDepartment(int id, [FromBody] UpdateDepartmentDto updateDepartmentDto)
         {
             var departmentToUpdate = updateDepartmentDto.ToUpdateDepartmentEntity();
-            var updatedLocation = await service.UpdateDepartmentAsync(id, departmentToUpdate);
-            
-            return Ok(updatedLocation);
+            // Service handles fetching, updating, and returns bool
+            var updated = await service.UpdateDepartmentAsync(id, departmentToUpdate);
+
+            if (!updated)
+                return NotFound(); // 404 if entity doesn't exist
+
+            return NoContent(); // 204 No Content if successful
         }
 
         // DELETE: api/department/{id}
