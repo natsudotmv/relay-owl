@@ -9,13 +9,13 @@ public static class DepartmentSeed
         if (!context.Departments.Any())
         {
             context.Departments.AddRange(
-                new Department { Name = "Human Resources" },
-                new Department { Name = "Finance" },
-                new Department { Name = "IT" },
-                new Department { Name = "Sales & Marketing" },
-                new Department { Name = "Front Office" },
-                new Department { Name = "Food & Beverage" },
-                new Department { Name = "Finance" }
+                new Department { Id=1, Name = "Human Resources" },
+                new Department { Id=2, Name = "Finance" },
+                new Department { Id=3, Name = "IT" },
+                new Department { Id=4, Name = "Sales & Marketing" },
+                new Department { Id=5, Name = "Front Office" },
+                new Department { Id=6, Name = "Food & Beverage" },
+                new Department { Id=7, Name = "Finance" }
             );
         }
     }

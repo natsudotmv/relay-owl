@@ -15,6 +15,7 @@ public class AppDbContext : DbContext
     public DbSet<Location> Locations { get; set; }
     public DbSet<Ticket> Tickets { get; set; }
     public DbSet<User> User { get; set; }
+    public DbSet<Comment> Comments { get; set; }
     
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -23,5 +24,6 @@ public class AppDbContext : DbContext
         builder.Entity<Location>().ToTable("Location");
         builder.Entity<Ticket>().ToTable("Ticket");
         builder.Entity<User>().ToTable("User");
+        builder.Entity<Comment>().ToTable("Comment");
     }
 }
