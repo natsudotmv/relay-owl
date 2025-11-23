@@ -1,11 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Relayowl.Core.Entities;
+using Relayowl.Core.Interfaces;
 using Relayowl.Core.Respositories;
 using Relayowl.Core.Services;
 using Relayowl.Infrastructure.Data;
 using Relayowl.Infrastructure.Data.Seed.Development;
 using Relayowl.Infrastructure.Data.Seed.Production;
 using Relayowl.Infrastructure.Repositories;
+using Relayowl.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,8 @@ builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 builder.Services.AddScoped<ITicketService, TicketService>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
