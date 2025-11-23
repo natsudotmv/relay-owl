@@ -6,7 +6,7 @@ using Relayowl.Core.Services;
 
 namespace Relayowl.Api.Controllers
 {
-    [Route("api/department")]
+    [Route("api/departments")]
     [ApiController]
     public class DepartmentController(IDepartmentService service) : ControllerBase
     {

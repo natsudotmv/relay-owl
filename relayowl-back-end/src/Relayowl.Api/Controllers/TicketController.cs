@@ -5,7 +5,7 @@ using Relayowl.Core.Services;
 
 namespace Relayowl.Api.Controllers
 {
-    [Route("api/ticket")]
+    [Route("api/tickets")]
     [ApiController]
     public class TicketController(ITicketService service) : ControllerBase
     {

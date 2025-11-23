@@ -6,7 +6,7 @@ using Relayowl.Core.Services;
 
 namespace Relayowl.Api.Controllers
 {
-    [Route("api/comment")]
+    [Route("api/comments")]
     [ApiController]
     public class CommentController(ICommentService service) : ControllerBase
     {

@@ -5,7 +5,7 @@ using Relayowl.Core.Services;
 
 namespace Relayowl.Api.Controllers
 {
-    [Route("api/location")]
+    [Route("api/locations")]
     [ApiController]
     public class LocationController(ILocationService service) : ControllerBase
     {
