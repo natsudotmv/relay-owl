@@ -1,0 +1,52 @@
+services:
+  react-app:
+    build:
+      context: ./front-end/relayowl-react-app/
+      dockerfile: Dockerfile
+    container_name: relayowl-react-app
+    ports:
+      - "3000:80"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5001
+    depends_on:
+      - api
+
+  admin-react-app:
+    build:
+      context: ./front-end/relayowl-admin-react-app/
+      dockerfile: Dockerfile
+    container_name: relayowl-admin-react-app
+    ports:
+      - "3001:80"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5001
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ./relayowl-back-end/src/
+      dockerfile: Dockerfile
+    container_name: relayowl-api
+    ports: 
+      - "5001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=relayowl-postgres-db;Database=relayowl;Username=user;Password=password
+    depends_on:
+      - db
+    
+  db:
+    image: postgres:latest
+    container_name: relayowl-postgres-db
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=relayowl
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

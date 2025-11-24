@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A25D361B-5AA3-4C45-A7F9-015CA77639F4}"
+	ProjectSection(SolutionItems) = preProject
+		src\Dockerfile = src\Dockerfile
+		src\.dockerignore = src\.dockerignore
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relayowl.Api", "src\Relayowl.Api\Relayowl.Api.csproj", "{12A5087F-98EF-47E6-B021-C3B12346628C}"
 EndProject
