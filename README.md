@@ -19,7 +19,30 @@ Think of it as a **magical workflow system** inspired by hotel operations and Ha
 ## Tech Stack
 - Backend: **.NET Core WebAPI**  
 - Database: **PostgreSQL**  
-- Frontend: **React.js**  
+- Frontend: **React.js** <BR><BR>
+- **Docker** for Containerization
+---
+## Setup Instructions (Production)
+1. From the project root, run:
+```bash
+docker compose build
+docker compose up -d
+```
+This will:
+- Build and start the React App on port 3000
+- Build and start the Admin React App on port 3001
+- Build and start the API on port 5001
+- Start the PostgreSQL database on port 5432
+- Automatically connect all services inside a shared Docker network
+
+2. Access the Applications <BR>
+
+| Service           | URL                       | Description               |
+|-------------------|---------------------------|---------------------------|
+| React App         | http://localhost:3000     | Customer-facing app       |
+| Admin React App   | http://localhost:3001     | Internal admin dashboard  |
+| API (.NET)        | http://localhost:5001     | Backend service           |
+| PostgreSQL        | localhost:5432            | Database instance         |
 
 ---
 ## Setup Instructions (Development)
