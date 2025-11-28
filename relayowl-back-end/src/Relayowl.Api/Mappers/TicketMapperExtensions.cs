@@ -11,9 +11,25 @@ public static class TicketMapperExtensions
             Id = ticket.Id,
             Title = ticket.Title,
             Description = ticket.Description,
+            
+            Priority = ticket.Priority,
             Status = ticket.Status,
+            
+            DepartmentId = ticket.DepartmentId,
+            DepartmentName = ticket.Department?.Name ?? string.Empty,
+            
+            LocationId = ticket.LocationId,
+            LocationName = ticket.Location?.Name ?? string.Empty,
+            
+            CreatedById = ticket.CreatedById,
+            CreatedByName = ticket.CreatedBy?.FullName ?? string.Empty,
+            
             CreatedAt = ticket.CreatedAt,
-            UpdatedAt = ticket.UpdatedAt
+            UpdatedAt = ticket.UpdatedAt,
+            
+            Comments = ticket.Comments
+                .Select(c => c.ToReadCommentDto())
+                .ToList()
         };
     }
     
@@ -23,7 +39,16 @@ public static class TicketMapperExtensions
         {
             Title = dto.Title,
             Description = dto.Description,
-            Status = dto.Status
+            
+            Priority = dto.Priority,
+            Status = dto.Status,
+            
+            DepartmentId = dto.DepartmentId,
+            LocationId = dto.LocationId,
+            CreatedById = dto.CreatedById,
+            
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
         };
     }
     
