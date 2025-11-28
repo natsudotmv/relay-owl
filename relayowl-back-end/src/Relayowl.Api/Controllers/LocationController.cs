@@ -42,12 +42,14 @@ namespace Relayowl.Api.Controllers
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateLocationDto updateLocationDto)
         {
-            var locationToUpdate = updateLocationDto.ToUpdateLocation();
-            // Service handles fetching, updating, and returns bool
-            var updated = await service.UpdateLocationAsync(id, locationToUpdate);
-
-            if (!updated)
+            var locationToUpdate = await service.GetLocationByIdAsync(id);
+            
+            if (locationToUpdate == null)
                 return NotFound(); // 404 if entity doesn't exist
+            
+            locationToUpdate.Name = updateLocationDto.Name;
+            await service.UpdateLocationAsync(id, locationToUpdate);
+
 
             return NoContent(); // 204 No Content if successful
         }
