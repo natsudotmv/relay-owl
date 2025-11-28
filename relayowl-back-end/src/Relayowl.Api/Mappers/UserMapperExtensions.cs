@@ -23,6 +23,7 @@ public static class UserMapperExtensions
         {
             Email = dto.Email,
             FullName = dto.FullName,
+            PasswordHash = dto.PasswordHash,
             Role = dto.Role,
             DepartmentId = dto.DepartmentId
         };

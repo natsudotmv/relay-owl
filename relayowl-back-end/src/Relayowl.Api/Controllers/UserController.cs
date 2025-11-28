@@ -36,7 +36,7 @@ namespace Relayowl.Api.Controllers
             var user = createUserDto.ToCreateUserEntity();
             await service.CreateUserAsync(user);
             var createdUserDto = user.ToReadUserDto();
-            return CreatedAtAction(nameof(GetUserById), new { id = createdUserDto.Id }, createUserDto);
+            return CreatedAtAction(nameof(GetUserById), new { id = createdUserDto.Id }, createdUserDto);
         }
         
         // PUT: api/user{id}
