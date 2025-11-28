@@ -40,13 +40,15 @@ namespace Relayowl.Api.Controllers
         
         // PUT: api/comment/{id}
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Core.Entities.Comment comment)
+        public async Task<ActionResult<ReadCommentDto>> Update(int id, [FromBody] UpdateCommentDto updateCommentDto)
         {
-            var updatedComment = await service.UpdateCommentAsync(id, comment);
-            if (!updatedComment)
-            {
+            var commentToUpdate = await service.GetCommentByIdAsync(id);
+            if (commentToUpdate == null)
                 return NotFound(); // 404 if entity doesn't exist
-            }
+            
+            commentToUpdate.Message = updateCommentDto.Message;
+            
+            await service.UpdateCommentAsync(id, commentToUpdate);
             return NoContent(); // 204 No Content if successful
         }
         

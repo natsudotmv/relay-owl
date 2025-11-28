@@ -31,7 +31,7 @@ public static class CommentMapperExtensions
     {
         return new Comment()
         {
-            Message = dto.Message
+            Message = dto.Message,
         };
     }
 }

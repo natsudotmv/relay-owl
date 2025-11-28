@@ -27,7 +27,7 @@ public class CommentService(ICommentRepository repository) : ICommentService
     {
         ArgumentNullException.ThrowIfNull(comment);
 
-        var existingComment = await repository.GetByIdAsync(comment.Id);
+        var existingComment = await repository.GetByIdAsync(id);
         if (existingComment == null)
             return false;
         
