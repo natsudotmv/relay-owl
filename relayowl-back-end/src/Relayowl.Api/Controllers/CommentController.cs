@@ -45,10 +45,10 @@ namespace Relayowl.Api.Controllers
             var commentToUpdate = await service.GetCommentByIdAsync(id);
             if (commentToUpdate == null)
                 return NotFound(); // 404 if entity doesn't exist
-            
+
             commentToUpdate.Message = updateCommentDto.Message;
-            
             await service.UpdateCommentAsync(id, commentToUpdate);
+            
             return NoContent(); // 204 No Content if successful
         }
         
