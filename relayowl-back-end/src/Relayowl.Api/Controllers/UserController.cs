@@ -41,13 +41,19 @@ namespace Relayowl.Api.Controllers
         
         // PUT: api/user{id}
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateUser(int id, [FromBody] Core.Entities.User user)
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserDto updateUserDto)
         {
-            var updatedTicket = await service.UpdateUserAsync(id, user);
-            if (!updatedTicket)
-            {
+            var userToUpdate = await service.GetUserByIdAsync(id);
+            
+            if (userToUpdate == null)
                 return NotFound(); // 404 if entity doesn't exist
-            }
+            
+            userToUpdate.FullName = updateUserDto.FullName;
+            userToUpdate.Email = updateUserDto.Email;
+            userToUpdate.Role = updateUserDto.Role;
+            userToUpdate.DepartmentId = updateUserDto.DepartmentId;
+            await service.UpdateUserAsync(id, userToUpdate);
+            
             return NoContent(); // 204 No Content if successful
         }
         
