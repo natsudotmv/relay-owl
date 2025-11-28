@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Relayowl.Core.Entities;
 
 namespace Relayowl.Infrastructure.Data.Seed.Production;
@@ -18,5 +19,10 @@ public static class DepartmentSeed
                 new Department { Id=7, Name = "Finance" }
             );
         }
+        context.SaveChanges();
+        
+        context.Database.ExecuteSql(
+                $"SELECT setval('\"Department_Id_seq\"', {context.Departments.Max(d => d.Id)});"
+            );
     }
 }

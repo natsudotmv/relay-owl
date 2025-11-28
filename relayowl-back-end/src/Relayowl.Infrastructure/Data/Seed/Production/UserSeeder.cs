@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Relayowl.Core.Entities;
 
 namespace Relayowl.Infrastructure.Data.Seed.Production;
@@ -22,5 +23,10 @@ public static class UserSeeder
                 }
             );
         }
+        context.SaveChanges();
+        
+        context.Database.ExecuteSql(
+                $"SELECT setval('\"User_Id_seq\"', {context.Users.Max(u => u.Id)});"
+            );
     }
 }

@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Relayowl.Infrastructure.Data.Seed.Development;
 
 public static class CommentSeeder
@@ -34,5 +36,9 @@ public static class CommentSeeder
             );
         }
         context.SaveChanges();
+
+        context.Database.ExecuteSql(
+                $"SELECT setval('\"Comment_Id_seq\"', {context.Comments.Max(c => c.Id)});"
+            );
     }
 }

@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Relayowl.Infrastructure.Data.Seed.Development;
 
 public static class LocationSeeder
@@ -14,5 +16,11 @@ public static class LocationSeeder
                 new Core.Entities.Location { Id = 5, Name = "Room 104" }
             );
         }
+
+        context.SaveChanges();
+
+        context.Database.ExecuteSql(
+            $"SELECT setval('\"Location_Id_seq\"', {context.Locations.Max(l => l.Id)});"
+        );
     }
 }

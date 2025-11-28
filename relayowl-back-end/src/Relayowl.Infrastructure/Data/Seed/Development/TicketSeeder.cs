@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Relayowl.Infrastructure.Data.Seed.Development;
 
 public static class TicketSeeder
@@ -36,5 +38,11 @@ public static class TicketSeeder
                 }
             );
         }
+        
+        context.SaveChanges();
+        
+        context.Database.ExecuteSql(
+                $"SELECT setval('\"Ticket_Id_seq\"', {context.Tickets.Max(t => t.Id)});"
+            );
     }
 }
