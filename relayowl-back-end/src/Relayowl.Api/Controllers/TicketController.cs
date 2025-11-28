@@ -45,12 +45,7 @@ namespace Relayowl.Api.Controllers
             if (ticketToUpdate == null)
                 return NotFound(); // 404 if entity doesn't exist
             
-            ticketToUpdate.Title = updateTicketDto.Title;
-            ticketToUpdate.Description = updateTicketDto.Description;
-            ticketToUpdate.Priority = updateTicketDto.Priority;
-            ticketToUpdate.Status = updateTicketDto.Status;
-            ticketToUpdate.DepartmentId = updateTicketDto.DepartmentId;
-            ticketToUpdate.LocationId = updateTicketDto.LocationId;
+            ticketToUpdate.UpdateTicket(updateTicketDto);
             await service.UpdateTicketAsync(id, ticketToUpdate);
             
             return NoContent(); // 204 No Content if successful

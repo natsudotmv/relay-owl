@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using Relayowl.Api.DTOs.User;
+using Relayowl.Core.Entities;
 
 namespace Relayowl.Api.Mappers;
 
@@ -29,14 +30,11 @@ public static class UserMapperExtensions
         };
     }
     
-    public static Core.Entities.User ToUpdateUser(this UpdateUserDto dto)
+    public static void UpdateUser(this User user ,UpdateUserDto dto)
     {
-        return new Core.Entities.User()
-        {
-            Email = dto.Email,
-            FullName = dto.FullName,
-            Role = dto.Role,
-            DepartmentId = dto.DepartmentId
-        };
+        user.Email = dto.Email;
+        user.FullName = dto.FullName;
+        user.Role = dto.Role;
+        user.DepartmentId = dto.DepartmentId;
     }
 }

@@ -27,11 +27,8 @@ public static class CommentMapperExtensions
         };
     }
     
-    public static Comment ToUpdateCommentEntity(this UpdateCommentDto dto)
+    public static void UpdateComment(this Comment comment, UpdateCommentDto dto)
     {
-        return new Comment()
-        {
-            Message = dto.Message,
-        };
+        comment.Message = dto.Message;
     }
 }

@@ -22,11 +22,8 @@ public static class DepartmentMapperExtensions
         };
     }
     
-    public static Department ToUpdateDepartmentEntity(this UpdateDepartmentDto dto)
+    public static void UpdateDepartment(this Department department, UpdateDepartmentDto dto)
     {
-        return new Department()
-        {
-            Name = dto.Name
-        };
+        department.Name = dto.Name;
     }
 }

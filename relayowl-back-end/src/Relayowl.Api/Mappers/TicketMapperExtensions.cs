@@ -1,4 +1,5 @@
 using Relayowl.Api.DTOs.Ticket;
+using Relayowl.Core.Entities;
 
 namespace Relayowl.Api.Mappers;
 
@@ -52,13 +53,13 @@ public static class TicketMapperExtensions
         };
     }
     
-    public static Core.Entities.Ticket ToUpdateTicket(this UpdateTicketDto dto)
+    public static void UpdateTicket(this Ticket ticket, UpdateTicketDto dto)
     {
-        return new Core.Entities.Ticket()
-        {
-            Title = dto.Title,
-            Description = dto.Description,
-            Status = dto.Status
-        };
+        ticket.Title = dto.Title;
+        ticket.Description = dto.Description;
+        ticket.Priority = dto.Priority;
+        ticket.Status = dto.Status;
+        ticket.DepartmentId = dto.DepartmentId;
+        ticket.LocationId = dto.LocationId;
     }
 }

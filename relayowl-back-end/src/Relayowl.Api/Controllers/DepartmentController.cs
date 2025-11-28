@@ -46,7 +46,7 @@ namespace Relayowl.Api.Controllers
             if (departmentToUpdate == null)
                 return NotFound(); // 404 if entity doesn't exist
             
-            departmentToUpdate.Name = updateDepartmentDto.Name;
+            departmentToUpdate.UpdateDepartment(updateDepartmentDto);
             await service.UpdateDepartmentAsync(id, departmentToUpdate);
 
             return NoContent(); // 204 No Content if successful

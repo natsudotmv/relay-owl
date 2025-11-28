@@ -22,11 +22,8 @@ public static class LocationMapperExtensions
         };
     }
     
-    public static Location ToUpdateLocation(this UpdateLocationDto dto)
+    public static void UpdateLocation(this Location location, UpdateLocationDto dto)
     {
-        return new Location()
-        {
-            Name = dto.Name
-        };
+        location.Name = dto.Name;
     }
 }

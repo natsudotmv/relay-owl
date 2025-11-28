@@ -48,10 +48,7 @@ namespace Relayowl.Api.Controllers
             if (userToUpdate == null)
                 return NotFound(); // 404 if entity doesn't exist
             
-            userToUpdate.FullName = updateUserDto.FullName;
-            userToUpdate.Email = updateUserDto.Email;
-            userToUpdate.Role = updateUserDto.Role;
-            userToUpdate.DepartmentId = updateUserDto.DepartmentId;
+            userToUpdate.UpdateUser(updateUserDto);
             await service.UpdateUserAsync(id, userToUpdate);
             
             return NoContent(); // 204 No Content if successful

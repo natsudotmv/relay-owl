@@ -47,7 +47,7 @@ namespace Relayowl.Api.Controllers
             if (locationToUpdate == null)
                 return NotFound(); // 404 if entity doesn't exist
             
-            locationToUpdate.Name = updateLocationDto.Name;
+            locationToUpdate.UpdateLocation(updateLocationDto);
             await service.UpdateLocationAsync(id, locationToUpdate);
 
 
