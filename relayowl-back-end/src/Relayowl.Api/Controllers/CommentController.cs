@@ -14,6 +14,9 @@ namespace Relayowl.Api.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
             var ticket = await service.GetCommentByIdAsync(id);
             
             return Ok(ticket?.ToReadCommentDto());
@@ -23,6 +26,9 @@ namespace Relayowl.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
             var comments = await service.GetAllCommentsAsync();
             var ticketDtos = comments.Select(t => t.ToReadCommentDto()).ToList();
             return Ok(ticketDtos);
@@ -32,6 +38,9 @@ namespace Relayowl.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<ReadCommentDto>> Create([FromBody] CreateCommentDto createCommentDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var comment = createCommentDto.ToCreateCommentEntity();
             await service.CreateCommentAsync(comment);
             var createdTicket = comment.ToReadCommentDto();
@@ -42,6 +51,9 @@ namespace Relayowl.Api.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult<ReadCommentDto>> Update(int id, [FromBody] UpdateCommentDto updateCommentDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
             var commentToUpdate = await service.GetCommentByIdAsync(id);
             if (commentToUpdate == null)
                 return NotFound(); // 404 if entity doesn't exist
@@ -56,6 +68,9 @@ namespace Relayowl.Api.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
             var deleted = await service.DeleteCommentAsync(id);
             if (!deleted)
             {

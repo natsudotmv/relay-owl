@@ -13,6 +13,9 @@ namespace Relayowl.Api.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var location = await service.GetLocationByIdAsync(id);
             
             return Ok(location?.ToReadLocationDto());
@@ -22,6 +25,9 @@ namespace Relayowl.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var locations = await service.GetAllLocationsAsync();
             var locationDtos = locations.Select(loc => loc.ToReadLocationDto()).ToList();
             return Ok(locationDtos);
@@ -31,6 +37,9 @@ namespace Relayowl.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<ReadLocationDto>> Create([FromBody] CreateLocationDto createLocationDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var location = createLocationDto.ToCreateLocationEntiy();
             await service.CreateLocationAsync(location);
             var readDto = location.ToReadLocationDto();
@@ -42,6 +51,9 @@ namespace Relayowl.Api.Controllers
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateLocationDto updateLocationDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var locationToUpdate = await service.GetLocationByIdAsync(id);
             
             if (locationToUpdate == null)
@@ -58,6 +70,9 @@ namespace Relayowl.Api.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var deleted = await service.DeleteLocationAsync(id);
             if (!deleted)
                 return NotFound();

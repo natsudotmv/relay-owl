@@ -13,6 +13,9 @@ namespace Relayowl.Api.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var ticket = await service.GetTicketByIdAsync(id);
             
             return Ok(ticket?.ToReadTicketDto());
@@ -22,6 +25,9 @@ namespace Relayowl.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var tickets = await service.GetAllTicketsAsync();
             var ticketDtos = tickets.Select(t => t.ToReadTicketDto()).ToList();
             return Ok(ticketDtos);
@@ -31,6 +37,9 @@ namespace Relayowl.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<ReadTicketDto>> Create([FromBody] CreateTicketDto createTicketDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var ticket = createTicketDto.ToCreateTicketEntity();
             await service.CreateTicketAsync(ticket);
             var createdTicket = ticket.ToReadTicketDto();
@@ -41,6 +50,9 @@ namespace Relayowl.Api.Controllers
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateTicketDto updateTicketDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var ticketToUpdate = await service.GetTicketByIdAsync(id);
             if (ticketToUpdate == null)
                 return NotFound(); // 404 if entity doesn't exist
@@ -55,6 +67,9 @@ namespace Relayowl.Api.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var deleted = await service.DeleteTicketAsync(id);
             if (!deleted)
             {

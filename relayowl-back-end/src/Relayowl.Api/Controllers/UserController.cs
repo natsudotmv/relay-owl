@@ -14,6 +14,9 @@ namespace Relayowl.Api.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetUserById(int id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var user = await service.GetUserByIdAsync(id);
             if (user == null)
                 return NotFound();
@@ -25,6 +28,9 @@ namespace Relayowl.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var users = await service.GetAllUsersAsync();
             return Ok(users);
         }
@@ -33,6 +39,9 @@ namespace Relayowl.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<ReadUserDto>> CreateUser([FromBody] CreateUserDto createUserDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var user = createUserDto.ToCreateUserEntity();
             await service.CreateUserAsync(user);
             var createdUserDto = user.ToReadUserDto();
@@ -43,6 +52,9 @@ namespace Relayowl.Api.Controllers
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserDto updateUserDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var userToUpdate = await service.GetUserByIdAsync(id);
             
             if (userToUpdate == null)
@@ -58,6 +70,9 @@ namespace Relayowl.Api.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var deleted = await service.DeleteUserAsync(id);
             if (!deleted)
             {
