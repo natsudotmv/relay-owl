@@ -14,7 +14,7 @@ public static class CommentSeeder
                     Id = 1,
                     Message = "This is the first comment.",
                     TicketId = 1,
-                    UserId = 1,
+                    DomainUserId = 1,
                     CreatedAt = DateTime.UtcNow.AddDays(-5)
                 },
                 new Core.Entities.Comment
@@ -22,7 +22,7 @@ public static class CommentSeeder
                     Id = 2,
                     Message = "This is the second comment.",
                     TicketId = 2,
-                    UserId = 1,
+                    DomainUserId = 1,
                     CreatedAt = DateTime.UtcNow.AddDays(-4)
                 },
                 new Core.Entities.Comment
@@ -30,7 +30,7 @@ public static class CommentSeeder
                     Id = 3,
                     Message = "This is the third comment.",
                     TicketId = 2,
-                    UserId = 1,
+                    DomainUserId = 1,
                     CreatedAt = DateTime.UtcNow.AddDays(-3)
                 }
             );

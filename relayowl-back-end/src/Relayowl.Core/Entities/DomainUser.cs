@@ -1,6 +1,6 @@
 namespace Relayowl.Core.Entities;
 
-public class User
+public class DomainUser
 {
     public int Id { get; set; }
     public string FullName { get; set; } = null!;

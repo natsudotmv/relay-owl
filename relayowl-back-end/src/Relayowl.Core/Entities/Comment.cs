@@ -7,8 +7,9 @@ public class Comment
     
     public int TicketId { get; set; }
     public Ticket? Ticket { get; set; }
-    public int UserId { get; set; }
-    public User User { get; set; } = null!;
+    
+    public int DomainUserId { get; set; }
+    public DomainUser DomainUser { get; set; } = null!;
 
     public DateTime CreatedAt { get; set; }
 }

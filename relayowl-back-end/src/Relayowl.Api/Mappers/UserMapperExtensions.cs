@@ -6,21 +6,21 @@ namespace Relayowl.Api.Mappers;
 
 public static class UserMapperExtensions
 {
-    public static ReadUserDto ToReadUserDto(this Core.Entities.User user)
+    public static ReadUserDto ToReadUserDto(this Core.Entities.DomainUser domainUser)
     {
         return new ReadUserDto
         {
-            Id = user.Id,
-            Email = user.Email,
-            FullName = user.FullName,
-            Role = user.Role,
-            DepartmentId = user.DepartmentId
+            Id = domainUser.Id,
+            Email = domainUser.Email,
+            FullName = domainUser.FullName,
+            Role = domainUser.Role,
+            DepartmentId = domainUser.DepartmentId
         };
     }
     
-    public static Core.Entities.User ToCreateUserEntity(this CreateUserDto dto)
+    public static Core.Entities.DomainUser ToCreateUserEntity(this CreateUserDto dto)
     {
-        return new Core.Entities.User()
+        return new Core.Entities.DomainUser()
         {
             Email = dto.Email,
             FullName = dto.FullName,
@@ -30,11 +30,11 @@ public static class UserMapperExtensions
         };
     }
     
-    public static void UpdateUser(this User user ,UpdateUserDto dto)
+    public static void UpdateUser(this DomainUser domainUser ,UpdateUserDto dto)
     {
-        user.Email = dto.Email;
-        user.FullName = dto.FullName;
-        user.Role = dto.Role;
-        user.DepartmentId = dto.DepartmentId;
+        domainUser.Email = dto.Email;
+        domainUser.FullName = dto.FullName;
+        domainUser.Role = dto.Role;
+        domainUser.DepartmentId = dto.DepartmentId;
     }
 }

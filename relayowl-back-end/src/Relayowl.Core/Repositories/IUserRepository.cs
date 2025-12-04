@@ -4,9 +4,9 @@ namespace Relayowl.Core.Respositories;
 
 public interface IUserRepository
 {
-    Task<User?> GetByIdAsync(int id);
-    Task<List<User>> GetAllAsync();
-    Task AddAsync(User user);
-    Task UpdateAsync(User user);
-    Task DeleteAsync(User user);
+    Task<DomainUser?> GetByIdAsync(int id);
+    Task<List<DomainUser>> GetAllAsync();
+    Task AddAsync(DomainUser domainUser);
+    Task UpdateAsync(DomainUser domainUser);
+    Task DeleteAsync(DomainUser domainUser);
 }

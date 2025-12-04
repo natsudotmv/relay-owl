@@ -7,37 +7,37 @@ namespace Relayowl.Infrastructure.Repositories;
 
 public class UserRepository(AppDbContext context) : IUserRepository
 {
-    public async Task<User?> GetByIdAsync(int id)
+    public async Task<DomainUser?> GetByIdAsync(int id)
     {
-        return await context.Users.FindAsync(id);
+        return await context.DomainUsers.FindAsync(id);
     }
 
-    public async Task<List<User>> GetAllAsync()
+    public async Task<List<DomainUser>> GetAllAsync()
     {
-        return await context.Users.ToListAsync();
+        return await context.DomainUsers.ToListAsync();
     }
 
-    public async Task AddAsync(User user)
+    public async Task AddAsync(DomainUser domainUser)
     {
-        ArgumentNullException.ThrowIfNull(user);
+        ArgumentNullException.ThrowIfNull(domainUser);
 
-        await context.Users.AddAsync(user);
+        await context.DomainUsers.AddAsync(domainUser);
         await context.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(User user)
+    public async Task UpdateAsync(DomainUser domainUser)
     {
-        ArgumentNullException.ThrowIfNull(user);
+        ArgumentNullException.ThrowIfNull(domainUser);
         
-        context.Users.Update(user);
+        context.DomainUsers.Update(domainUser);
         await context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(User user)
+    public async Task DeleteAsync(DomainUser domainUser)
     {
-        ArgumentNullException.ThrowIfNull(user);
+        ArgumentNullException.ThrowIfNull(domainUser);
         
-        context.Users.Remove(user);
+        context.DomainUsers.Remove(domainUser);
         await context.SaveChangesAsync();
     }
 }

@@ -4,9 +4,9 @@ namespace Relayowl.Core.Interfaces;
 
 public interface IUserService
 {
-    Task<User?> GetUserByIdAsync(int id);
-    Task<List<User>> GetAllUsersAsync();
-    Task<User> CreateUserAsync(User user);
-    Task<bool> UpdateUserAsync(int id, User user);
+    Task<DomainUser?> GetUserByIdAsync(int id);
+    Task<List<DomainUser>> GetAllUsersAsync();
+    Task<DomainUser> CreateUserAsync(DomainUser domainUser);
+    Task<bool> UpdateUserAsync(int id, DomainUser domainUser);
     Task<bool> DeleteUserAsync(int id);
 }

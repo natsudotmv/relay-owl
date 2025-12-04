@@ -12,7 +12,7 @@ public static class CommentMapperExtensions
             Id = comment.Id,
             Message = comment.Message,
             TicketId = comment.TicketId,
-            UserId = comment.UserId,
+            UserId = comment.DomainUserId,
             CreatedAt = comment.CreatedAt
         };
     }
@@ -23,7 +23,7 @@ public static class CommentMapperExtensions
         {
             Message = dto.Message,
             TicketId = dto.TicketId,
-            UserId = dto.UserId
+            DomainUserId = dto.UserId
         };
     }
     

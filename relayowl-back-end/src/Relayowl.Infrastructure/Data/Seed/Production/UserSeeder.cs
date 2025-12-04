@@ -8,10 +8,10 @@ public static class UserSeeder
     public static void Seed(AppDbContext context)
     {
         // Seed initial users if none exist
-        if (!context.Users.Any())
+        if (!context.DomainUsers.Any())
         {
-            context.Users.AddRange(
-                new User
+            context.DomainUsers.AddRange(
+                new DomainUser
                 {
                     Id = 1,
                     FullName = "Super User",
@@ -26,7 +26,7 @@ public static class UserSeeder
         context.SaveChanges();
         
         context.Database.ExecuteSql(
-                $"SELECT setval('\"User_Id_seq\"', {context.Users.Max(u => u.Id)});"
+                $"SELECT setval('\"DomainUser_Id_seq\"', {context.DomainUsers.Max(u => u.Id)});"
             );
     }
 }
